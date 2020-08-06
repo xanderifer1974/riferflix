@@ -1,11 +1,20 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Menu from '../../components/Menu'
 import DadosIniciais from '../../data/dados_iniciais.json'
 import Carousel from '../../components/Carousel'
 import BannerMain from '../../components/BannerMain'
 import Footer from '../../components/Footer'
+import categoriasRepository from '../../repositories/categorias'
 
 function Home() {
+
+  useEffect(() => {
+    categoriasRepository.getAllWithVideos();
+    
+   
+  });
+  // http://localhost:8080/categorias?_embed=videos
+
   return (
     <div style={{ background: "#141414" }}>
       <Menu />

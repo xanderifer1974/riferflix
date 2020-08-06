@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react'
 import PageDefault from '../../../components/PageDefault'
 import { Link } from 'react-router-dom'
 import FormField from '../../../components/FormField';
+import Button from '../../../components/Button';
+import useForm from '../../../hooks/useForm';
+
+
 
 function CadastroCategoria() {
 
@@ -10,23 +14,12 @@ function CadastroCategoria() {
     descricao: '',
     cor: ''
   }
+
+  const {handleChange,values,clearForm} = useForm(valoresIniciais);
   const [categorias, setCategorias] = useState([]);
-  const [values, setValues] = useState(valoresIniciais);
+ 
 
-  function setValue(chave, valor) {
-    setValues({
-      ...values,
-      [chave]: valor,
-    })
-  }
-
-  //Função genérica de manipulação
-  function handleChange(evento) {
-    setValue(
-      evento.target.getAttribute('name'),
-      evento.target.value);
-  }
-
+ 
   useEffect(() => {
     if (window.location.href.includes('localhost')) {
       const URL = 'http://localhost:8080/categorias';
@@ -54,7 +47,7 @@ function CadastroCategoria() {
           values
         ]);
 
-        setValue(valoresIniciais);
+        clearForm();
       }}>
 
         <FormField
@@ -81,9 +74,9 @@ function CadastroCategoria() {
           value={values.cor}
           onChange={handleChange}
         />
-        <button>
+        <Button>
           Cadastrar
-        </button>
+        </Button>
       </form>
 
       {categorias.length === 0 && (<div>
@@ -91,26 +84,15 @@ function CadastroCategoria() {
       </div>
       )}
 
-      {/* <ul>
-        {categorias.map((categoria, indice) => {
-          return (
-            <li key={`${categoria.nome}`}>
-              {categoria.nome}
-            </li>
-          )
-        })}
-      </ul> */}
       <ul>
-        {categorias.map((categoria, indice) => {
+        {categorias.map((categoria) => {
           return (
-            <li key={`${categoria}${indice}`}>
+            <li key={`${categoria.id}`}>
               {categoria.titulo}
             </li>
           )
         })}
-
-      </ul>
-
+      </ul>  
       <Link to="/">
         Ir para Home
           </Link>
