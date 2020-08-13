@@ -1,8 +1,8 @@
 import React from 'react'
-import ButtonLink from '../ButtonLink'
 import { Link } from 'react-router-dom'
 import Logo from '../../assets/imagens/Logo.png'
 import './menu.css'
+import Button from '../Button'
 
 function Menu() {
     return (
@@ -11,9 +11,9 @@ function Menu() {
                 <img className="Logo" src={Logo} alt="RiferFlix logo" />
             </Link>
             <Link to="/cadastro/video">
-                <ButtonLink className="ButtonLink">
+                <Button>
                     Novo Vídeo.
-                </ButtonLink>
+                </Button>
             </Link>
 
         </nav>
